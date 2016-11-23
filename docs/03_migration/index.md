@@ -31,7 +31,7 @@ Some fields have been renamed in the new API but carry the exact same meaning. T
 | per_page | size |
 | data_set_id | include_datasets |
 
-These fields map to a the new [`PifQuery`](!api/search/pif/query/PifQuery) object in the following way. Any fields that are not defined can be omitted.
+More generally, queries in the old API map to a the new [`PifQuery`](!api/search/pif/query/PifQuery) object in the following way. Any fields that are not defined can be omitted.
 
 ```Python
 from citrination-client import *
