@@ -12,7 +12,7 @@ The library can also be accessed directly on [github](https://github.com/Citrine
 
 ### Connecting to Citrination
 
-In order to access Citrination using the client library, you will need your API key. You individual key is available on your account page. This key is unique to you; do not share it with anyone.
+In order to access Citrination using the client library, you will need your API key. Your individual key is available on your account page. This key is unique to you; do not share it with anyone.
 
 With your API key, a client is configured to run against https://citrination.com with the following code block:
 
@@ -63,7 +63,7 @@ query = PifQuery(
 results = client.search(query)
 ```
 
-Results are return as a [`PifSearchResult`](!api/search/pif/result/PifSearchResult) object.
+Results are returned as a [`PifSearchResult`](!api/search/pif/result/PifSearchResult) object.
 
 ### Next steps
 
