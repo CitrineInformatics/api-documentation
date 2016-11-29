@@ -34,7 +34,7 @@ Some fields have been renamed in the new API but carry the exact same meaning. T
 More generally, queries in the old API map to a the new [`PifQuery`](!api/search/pif/query/PifQuery) object in the following way. Any fields that are not defined can be omitted.
 
 ```Python
-from citrination-client import *
+from citrination_client import *
 query = PifQuery(
     from_index=`from_record`,
     size=`per_page`,
