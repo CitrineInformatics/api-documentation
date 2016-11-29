@@ -17,14 +17,14 @@ In order to access Citrination using the client library, you will need your API 
 With your API key, a client is configured to run against https://citrination.com with the following code block:
 
 ```Python
-from citrination-client import *
+from citrination_client import *
 client = CitrinationClient('YOUR_API_KEY')
 ```
 
 For users with private deployments (the site that you are accessing appears as https://PROJECT-NAME.citrination.com), the client should be configured against your site:
 
 ```Python
-from citrination-client import *
+from citrination_client import *
 client = CitrinationClient('YOUR_API_KEY', 'https://PROJECT-NAME.citrination.com')
 ```
 
@@ -33,7 +33,7 @@ client = CitrinationClient('YOUR_API_KEY', 'https://PROJECT-NAME.citrination.com
 Citrination uses a robust [query language](!api/search/pif/query) to interact with the data that is stored. The following example simply runs a search that looks for records with chemical formula equal to GaN and with a band gap between 3 and 4 eV:
 
 ```Python
-from citrination-client import *
+from citrination_client import *
 client = CitrinationClient('YOUR_API_KEY')
 
 query = PifQuery(
