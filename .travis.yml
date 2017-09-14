@@ -4,4 +4,4 @@ before_script:
  - composer global require justinwalsh/daux.io
 
 script:
- - daux
+ - vendor/bin/daux
