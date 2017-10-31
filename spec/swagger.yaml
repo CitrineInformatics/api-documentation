@@ -16,9 +16,9 @@ info:
         url: 'https://www.apache.org/licenses/LICENSE-2.0'
     description: |
         # Introduction
-        Much of the functionality available on Citrination is also available through the API. In addition, some features are only available through the API. All access is controlled using an API token so users must have an account on Citrination in order to access the API.
+        The Citrination API provides much of the functionality that is available through the Citrination web interface. In addition, there exists some functionality that is only available through the API (for example, some of the more advanced query elements). All access to the API is controlled using a unique token assigned to each user (see the section on authentication).
 
-        Users may access the API directly through https requests, or may use one of the client libraries below.
+        Users may access the API directly through https requests, or may use one of the client libraries described below.
 
         # Python client
         A python client is available through [github](https://github.com/CitrineInformatics/python-citrination-client) or can be installed with pip using `pip install citrination-client`. There may be issues installing libraries that depend on [six](https://pypi.python.org/pypi/six) on OSX. If you encounter issues during installation, you may also try `pip install --ignore-installed six citrination-client`. The python client can be configured using:
