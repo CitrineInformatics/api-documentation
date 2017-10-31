@@ -12,19 +12,19 @@ The library can also be accessed directly on [github](https://github.com/Citrine
 
 ### Connecting to Citrination
 
-In order to access Citrination using the client library, you will need your API key. Your individual key is available on your account page. This key is unique to you; do not share it with anyone.
+In order to access Citrination using the client library, you will need your API key. You individual key is available on your account page. This key is unique to you; do not share it with anyone.
 
 With your API key, a client is configured to run against https://citrination.com with the following code block:
 
 ```Python
-from citrination_client import *
+from citrination-client import *
 client = CitrinationClient('YOUR_API_KEY')
 ```
 
 For users with private deployments (the site that you are accessing appears as https://PROJECT-NAME.citrination.com), the client should be configured against your site:
 
 ```Python
-from citrination_client import *
+from citrination-client import *
 client = CitrinationClient('YOUR_API_KEY', 'https://PROJECT-NAME.citrination.com')
 ```
 
@@ -33,7 +33,7 @@ client = CitrinationClient('YOUR_API_KEY', 'https://PROJECT-NAME.citrination.com
 Citrination uses a robust [query language](!api/search/pif/query) to interact with the data that is stored. The following example simply runs a search that looks for records with chemical formula equal to GaN and with a band gap between 3 and 4 eV:
 
 ```Python
-from citrination_client import *
+from citrination-client import *
 client = CitrinationClient('YOUR_API_KEY')
 
 query = PifQuery(
@@ -63,7 +63,7 @@ query = PifQuery(
 results = client.search(query)
 ```
 
-Results are returned as a [`PifSearchResult`](!api/search/pif/result/PifSearchResult) object.
+Results are return as a [`PifSearchResult`](!api/search/pif/result/PifSearchResult) object.
 
 ### Next steps
 
