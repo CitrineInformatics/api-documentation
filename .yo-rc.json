@@ -1,0 +1,10 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": false,
+    "name": "Citrination",
+    "repo": "CitrineInformatics/api-documentation",
+    "splitSpec": true,
+    "samples": true,
+    "installSwaggerUI": true
+  }
+}
