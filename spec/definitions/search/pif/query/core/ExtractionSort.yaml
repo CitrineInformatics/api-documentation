@@ -1,0 +1,12 @@
+type: object
+x-nullable: true
+default: null
+description: Sort to apply using the extractAs key set for a query element.
+properties:
+    key:
+        type: string
+        x-nullable: true
+        default: null
+        description: The extractAs key that appears in the query element that corresponds to the value to sort on.
+    order:
+        $ref: '#/definitions/sortOrder'

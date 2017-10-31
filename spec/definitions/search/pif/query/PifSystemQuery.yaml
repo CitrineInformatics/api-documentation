@@ -1,0 +1,88 @@
+type: object
+x-nullable: true
+default: null
+description: A query against the content of a PIF system.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        uid:
+            type: array
+            items:
+                $ref: '#/definitions/Filter'
+            x-nullable: true
+            default: null
+            description: Filters against the UID of the system.
+        updatedAt:
+            $ref: '#/definitions/updatedAtQuery'
+        names:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the name of the system.
+        ids:
+            type: array
+            items:
+                $ref: '#/definitions/IdQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the IDs of the system.
+        classifications:
+            type: array
+            items:
+                $ref: '#/definitions/ClassificationQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the classifications of the system.
+        source:
+            type: array
+            items:
+                $ref: '#/definitions/SourceQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the source of the system.
+        quantity:
+            type: array
+            items:
+                $ref: '#/definitions/QuantityQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the quantity of the system.
+        chemicalFormula:
+            type: array
+            items:
+                $ref: '#/definitions/ChemicalFieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the chemical formula of the system.
+        composition:
+            type: array
+            items:
+                $ref: '#/definitions/CompositionQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the chemical composition of the system.
+        properties:
+            type: array
+            items:
+                $ref: '#/definitions/PropertyQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the measured properties of the system.
+        preparation:
+            type: array
+            items:
+                $ref: '#/definitions/ProcessStepQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the process steps used to create of the system.
+        references:
+            type: array
+            items:
+                $ref: '#/definitions/ReferenceQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the publication information of the system.
+        subSystems:
+            $ref: '#/definitions/nested'

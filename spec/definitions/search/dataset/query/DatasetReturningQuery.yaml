@@ -1,0 +1,17 @@
+type: object
+description: A query that returns information about datasets.
+allOf:
+    - $ref: '#/definitions/BaseReturningQuery'
+    - properties:
+        query:
+            type: array
+            items:
+                $ref: '#/definitions/DataQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the content of datasets and/or PIF records.
+        countPifs:
+            type: boolean
+            x-nullable: true
+            default: null
+            description: Whether to count the number of PIFs in scope of the current query within each dataset. If there are no queries against the content of the PIFs, then this will return the total number of PIFs in the dataset. If there are queries against PIF content, then this will return the number of PIFs in each dataset that matched that query.

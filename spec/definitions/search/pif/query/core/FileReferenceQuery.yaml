@@ -1,0 +1,35 @@
+type: object
+x-nullable: true
+default: null
+description: A query against a reference to a file.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        relativePath:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the relative path of the file.
+        mimeType:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the mime type path of the file.
+        sha256:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the SHA256 hash of the file.
+        md5:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the MD5 hash of the file.

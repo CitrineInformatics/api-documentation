@@ -1,0 +1,21 @@
+type: object
+x-nullable: true
+default: null
+description: A query against the ID of a system.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        name:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the name of the ID.
+        value:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the value of the ID.

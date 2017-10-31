@@ -1,0 +1,14 @@
+type: object
+description: A filter against the value of a boolean-typed field.
+properties:
+    logic:
+        $ref: '#/definitions/logic'
+    exists:
+        $ref: '#/definitions/exists'
+    equal:
+        type: boolean
+        x-nullable: true
+        default: null
+        description: True to match true values. False to match false values.
+    filter:
+        $ref: '#/definitions/nested'

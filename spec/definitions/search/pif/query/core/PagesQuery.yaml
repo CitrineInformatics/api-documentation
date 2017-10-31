@@ -1,0 +1,21 @@
+type: object
+x-nullable: true
+default: null
+description: A query against the pages of a reference.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        start:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the first page of a reference.
+        end:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the last page of a reference.

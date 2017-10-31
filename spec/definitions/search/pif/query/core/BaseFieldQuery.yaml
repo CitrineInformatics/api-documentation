@@ -1,0 +1,13 @@
+type: object
+description: Base class for all queries against simple fields.
+properties:
+    logic:
+        $ref: '#/definitions/logic'
+    simple:
+        $ref: '#/definitions/simple'
+    extractAs:
+        $ref: '#/definitions/extractAs'
+    extractAll:
+        $ref: '#/definitions/extractAll'
+    extractWhenMissing:
+        $ref: '#/definitions/extractWhenMissing'
