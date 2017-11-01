@@ -29,7 +29,7 @@ info:
         client = CitrinationClient('YOUR_API_KEY')
         ```
 
-        If you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then you client can be configured with:
+        If you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then your client can be configured with:
 
         ```python
         from citrination-client import *
@@ -54,7 +54,7 @@ info:
         }
         ```
 
-        If you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then you client can be configured with:
+        If you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then your client can be configured with:
 
         ```java
         import io.citrine.jcc.core.CitrinationClient;
