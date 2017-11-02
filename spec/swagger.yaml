@@ -24,7 +24,7 @@ info:
         A python client is available through [github](https://github.com/CitrineInformatics/python-citrination-client) or can be installed with pip using `pip install citrination-client`. There may be issues installing libraries that depend on [six](https://pypi.python.org/pypi/six) on OSX. If you encounter issues during installation, you may also try `pip install --ignore-installed six citrination-client`. The python client can be configured using:
 
         ```python
-        from citrination-client import *
+        from citrination_client import *
 
         client = CitrinationClient('YOUR_API_KEY')
         ```
@@ -32,7 +32,7 @@ info:
         If you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then your client can be configured with:
 
         ```python
-        from citrination-client import *
+        from citrination_client import *
 
         client = CitrinationClient('YOUR_API_KEY', 'https://mysite.citrination.com')
         ```
