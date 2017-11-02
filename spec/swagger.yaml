@@ -37,7 +37,7 @@ info:
         client = CitrinationClient('YOUR_API_KEY', 'https://mysite.citrination.com')
         ```
 
-        Note that all variables and method names are represented in snake case in the python client library, rather than camel case as is used in this documentation. For example, a variable named `updatedAt` in this documentation would be `updated_at` in the python library.
+        <span style="color:red">**Important!**</span> All variables and method names are represented in snake case in the python client library, rather than camel case as is used in this documentation. For example, a variable named `updatedAt` in this documentation would be `updated_at` in the python library.
 
         # Java client
         A java client is available through [github](https://github.com/CitrineInformatics/java-citrination-client). The client can be configured using:
