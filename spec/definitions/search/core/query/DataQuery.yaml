@@ -1,0 +1,23 @@
+type: object
+description: A query against dataset metadata and/or PIF systems.
+properties:
+    logic:
+        $ref: '#/definitions/logic'
+    simple:
+        $ref: '#/definitions/simple'
+    dataset:
+        type: array
+        items:
+            $ref: '#/definitions/DatasetQuery'
+        x-nullable: true
+        default: null
+        description: A list of queries to run against the content of datasets.
+    system:
+        type: array
+        items:
+            $ref: '#/definitions/PifSystemQuery'
+        x-nullable: true
+        default: null
+        description: A list of queries to run against the content of PIFs.
+    query:
+        $ref: '#/definitions/nested'

@@ -1,0 +1,35 @@
+type: object
+x-nullable: true
+default: null
+description: A query against the name of a person.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        given:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the given (first) name of a person.
+        family:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the family (last) name of a person.
+        title:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the title of a person (e.g. Dr., Mr., Mrs., etc.)
+        suffix:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the suffix of a person.

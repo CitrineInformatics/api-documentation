@@ -1,0 +1,6 @@
+type: array
+items:
+    $ref: '#/definitions/FieldQuery'
+x-nullable: true
+default: null
+description: Queries against the index of an object within a list.

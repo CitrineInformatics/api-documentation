@@ -1,0 +1,21 @@
+type: object
+x-nullable: true
+default: null
+description: A query against a single process step in the preparation of a material.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        name:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the name of the process step.
+        details:
+            type: array
+            items:
+                $ref: '#/definitions/ValueQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the details of the process step.

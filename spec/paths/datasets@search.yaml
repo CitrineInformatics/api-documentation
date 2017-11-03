@@ -1,0 +1,20 @@
+post:
+    tags:
+        - search
+    summary: Search for datasets
+    description: Search for datasets by the metadata for that dataset or the content of the files and PIFs that it contains.
+    parameters:
+        - name: query
+          in: body
+          description: A query for datasets and options for that query.
+          required: true
+          schema:
+              $ref: '#/definitions/DatasetReturningQuery'
+    responses:
+        '200':
+            description: A search result with datasets that matched the input query.
+            schema:
+                type: object
+                properties:
+                    results:
+                        $ref: '#/definitions/DatasetSearchResult'

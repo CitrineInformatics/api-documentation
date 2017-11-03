@@ -1,0 +1,53 @@
+type: object
+description: A query against a Dataset.
+properties:
+    logic:
+        $ref: '#/definitions/logic'
+    simple:
+        $ref: '#/definitions/simple'
+    id:
+        type: array
+        items:
+            $ref: '#/definitions/Filter'
+        x-nullable: true
+        default: null
+        description: Queries against the ID of a dataset.
+    updatedAt:
+        $ref: '#/definitions/updatedAtQuery'
+    isFeatured:
+        type: array
+        items:
+            $ref: '#/definitions/BooleanFilter'
+        x-nullable: true
+        default: null
+        description: Queries against the isFeatured field of a dataset.
+    name:
+        type: array
+        items:
+            $ref: '#/definitions/Filter'
+        x-nullable: true
+        default: null
+        description: Queries against the name of a dataset.
+    description:
+        type: array
+        items:
+            $ref: '#/definitions/Filter'
+        x-nullable: true
+        default: null
+        description: Queries against the description of a dataset.
+    owner:
+        type: array
+        items:
+            $ref: '#/definitions/Filter'
+        x-nullable: true
+        default: null
+        description: Queries against the name of the owner of a dataset.
+    email:
+        type: array
+        items:
+            $ref: '#/definitions/Filter'
+        x-nullable: true
+        default: null
+        description: Queries against the email address of the owner of a dataset.
+    query:
+        $ref: '#/definitions/nested'

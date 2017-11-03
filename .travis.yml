@@ -1,13 +1,9 @@
-language: php
-before_script:
-- composer global require justinwalsh/daux.io
-script:
-- "~/.composer/vendor/bin/daux"
+language: node_js
+node_js:
+  - "node"
 deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: static
-  on:
-    branch: master
-  github_token:
-    secure: TU9i1BLJ9HhzT0W3opYLjFPzxcHxsUZAi92/lzYXI2aEtwOMNY37L5WIV/6BJqLEkeHkW1pDtL5fwGD+fEiZwbkwCRcrvTCNmPtJqLcgHPomKrTiTu7Bg0DeNZEJ7ic+IxjSj6nHkSW8R455adF64lnHrW5Q778eN/O8GELxuTZGztXzr96ky4GKqst/2Sf3a94coJKcgJ3wRiZ2Mng3WmmS2wSjO9dXiR8Ji3vr/FC/eUmdtQNlEOCTC5Smu39RgWlOm1Ww05y4kQyOiDwa7SjBeZmA8Og+7lL047pEuWHEujF1y8vBsEZcgrIma87OJgfDkX7Qenet8hrgzA7WNIarugKz2NpxH1WM1QWMiHuxQFRXXbP+4gAESNpkcmkXGOwSbwVIhdihokdqJ8glQvuPHHmFkM3JYhaTRRf77SHnVarw0J28Idjj25FLJcJ3Lcg/d/Cn3fBBo5kOLc2A1yGneZFQymMxAZIbjLPXwAom3hC/f9UBrk/yilU0mQUpKnhuFOcB80J07kAxMBQQycrkiI6Y2Gzq/0n+m+G5Sr9nw3NsLUl+D6oN59kxl8gCDOGIK6IJVxbNWGau+D9vpVBg/ZjMHCU5P40MB/fLhEuURX707KvkBij07jRUsCOHMyK0HPCIcwUQJKOJqWQAfDnz7C9iUYitQkl81uWq3rI=
+  - skip_cleanup: true
+    provider: script
+    script: npm run deploy
+    on:
+      branch: master

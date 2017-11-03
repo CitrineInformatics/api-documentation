@@ -1,0 +1,9 @@
+type: object
+x-nullable: true
+default: null
+description: Query against the value of a field that contains chemical information.
+allOf:
+    - $ref: '#/definitions/BaseFieldQuery'
+    - properties:
+        filter:
+            $ref: '#/definitions/ChemicalFilter'

@@ -1,0 +1,28 @@
+type: object
+x-nullable: true
+default: null
+description: A query against a display item in a publication.
+allOf:
+    - $ref: '#/definitions/BaseObjectQuery'
+    - properties:
+        number:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the number of the display item in the publication.
+        title:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the title of the display item.
+        caption:
+            type: array
+            items:
+                $ref: '#/definitions/FieldQuery'
+            x-nullable: true
+            default: null
+            description: Queries against the caption of the display item.
