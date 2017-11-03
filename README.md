@@ -8,4 +8,3 @@
 - Look full spec:
     + JSON https://citrineinformatics.github.io/api-documentation/swagger.json
     + YAML https://citrineinformatics.github.io/api-documentation/swagger.yaml
-- Preview spec version for branch `[branch]`: https://citrineinformatics.github.io/api-documentation/preview/[branch]
