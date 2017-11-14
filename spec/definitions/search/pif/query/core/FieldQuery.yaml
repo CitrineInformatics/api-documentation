@@ -6,4 +6,9 @@ allOf:
     - $ref: '#/definitions/BaseFieldQuery'
     - properties:
         filter:
-            $ref: '#/definitions/Filter'
+            type: array
+            items:
+                $ref: '#/definitions/Filter'
+            x-nullable: true
+            default: null
+            description: Filters against the value in the field.
