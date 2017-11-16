@@ -1,0 +1,6 @@
+type: number
+format: double
+x-nullable: true
+default: null
+description: >
+    A weight to apply to this query element. Weights are only applicable when relevance is being used. In that case, weights are used to bias results (by multiplying their score by this value) so that some parts of the query can have a higher or lower influence on the order of results. In the case that the weight is null, it is interpreted as a value of 1.

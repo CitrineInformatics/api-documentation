@@ -3,6 +3,8 @@ description: A filter against the value of a boolean-typed field.
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     exists:
         $ref: '#/definitions/exists'
     equal:
