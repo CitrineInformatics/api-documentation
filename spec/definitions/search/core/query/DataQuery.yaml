@@ -7,6 +7,8 @@ properties:
         $ref: '#/definitions/weight'
     simple:
         $ref: '#/definitions/simple'
+    simpleWeight:
+        $ref: '#/definitions/simpleWeight'
     dataset:
         type: array
         items:

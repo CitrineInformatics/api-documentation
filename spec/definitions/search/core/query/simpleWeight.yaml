@@ -1,0 +1,12 @@
+type: object
+x-nullable: true
+default: null
+additionalProperties:
+    type: number
+    format: double
+description: >
+    A map of relative paths to field weights for the simple query on this object. For example, if the current object had a field named fieldA, which in turn contained fields fieldA1 and fieldA2, then they could be weighted differently by setting this map to, for example, {"fieldA.fieldA1": 2.5, "fieldA.fieldA2": 1.5}.
+
+    Weights are multiplied onto the score for a field that matches a query. This only has an effect when relevance scoring is enabled.
+
+    Paths (keys in this map) are relative to the current object. Therefore, in the above example, the same weights could be configured from within the fieldA object, in which case it would be {"fieldA1": 2.5, "fieldA2": 1.5}.
