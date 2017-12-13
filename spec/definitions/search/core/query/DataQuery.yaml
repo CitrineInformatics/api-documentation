@@ -3,8 +3,12 @@ description: A query against dataset metadata and/or PIF systems.
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     simple:
         $ref: '#/definitions/simple'
+    simpleWeight:
+        $ref: '#/definitions/simpleWeight'
     dataset:
         type: array
         items:

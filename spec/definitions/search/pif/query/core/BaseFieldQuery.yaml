@@ -3,8 +3,12 @@ description: Base class for all queries against simple fields.
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     simple:
         $ref: '#/definitions/simple'
+    simpleWeight:
+        $ref: '#/definitions/simpleWeight'
     extractAs:
         $ref: '#/definitions/extractAs'
     extractAll:

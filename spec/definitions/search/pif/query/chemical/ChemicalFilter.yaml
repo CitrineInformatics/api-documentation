@@ -3,6 +3,8 @@ description: An equality filter against a field that contains chemical informati
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     exists:
         $ref: '#/definitions/exists'
     equal:

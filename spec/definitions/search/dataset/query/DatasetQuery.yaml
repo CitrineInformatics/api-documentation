@@ -3,8 +3,12 @@ description: A query against a Dataset.
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     simple:
         $ref: '#/definitions/simple'
+    simpleWeight:
+        $ref: '#/definitions/simpleWeight'
     id:
         type: array
         items:

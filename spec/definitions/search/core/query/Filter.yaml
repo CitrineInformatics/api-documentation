@@ -3,6 +3,8 @@ description: An equality or range filter against a single field.
 properties:
     logic:
         $ref: '#/definitions/logic'
+    weight:
+        $ref: '#/definitions/weight'
     exists:
         $ref: '#/definitions/exists'
     equal:
