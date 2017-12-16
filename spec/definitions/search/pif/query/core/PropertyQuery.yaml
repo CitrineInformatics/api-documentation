@@ -12,6 +12,13 @@ allOf:
             x-nullable: true
             default: null
             description: Queries against conditions of the property.
+        references:
+            type: array
+            items:
+                $ref: '#/definitions/ReferenceQuery'
+            x-nullable: true
+            default: null
+            description: Queries against references of the property.
         dataType:
             type: array
             items:
