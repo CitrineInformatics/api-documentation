@@ -19,7 +19,7 @@ post:
                     results:
                         $ref: '#/definitions/PifSearchResult'
         '500':
-            description: An unexpected error on the server.
+            description: Unexpected server error.
             schema:
                 type: object
                 properties:
