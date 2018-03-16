@@ -18,3 +18,23 @@ post:
                 properties:
                     results:
                         $ref: '#/definitions/PifSearchResult'
+        '500':
+            description: An unexpected error on the server.
+            schema:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        x-nullable: true
+                        default: null
+                        description: A description of the error.
+        '524':
+            description: Request timed out.
+            schema:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        x-nullable: true
+                        default: null
+                        description: A description of the timeout.

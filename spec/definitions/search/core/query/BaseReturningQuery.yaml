@@ -33,4 +33,10 @@ properties:
         type: boolean
         x-nullable: true
         default: null
-        description: Whether to return the maximum score over all hits in scope, not just the results that are returned. This only has meaning when scoreRelevance is set to true. If not specified, the default value of this settings is false.
+        description: Whether to return the maximum score over all hits in scope, not just the results that are returned. This only has meaning when scoreRelevance is set to true. If not specified, the default value of this setting is false.
+    timeout:
+        type: number
+        format: int32
+        x-nullable: true
+        default: null
+        description: The maximum time, in milliseconds, to wait for the query to finish execution. An effort is made to respect this timeout though there is no guarantee that the request will be terminated at exactly this time. If not specified, the default value of this setting is 60000 (equal to 60 seconds).
