@@ -18,6 +18,16 @@ post:
                 properties:
                     results:
                         $ref: '#/definitions/DatasetSearchResult'
+        '204':
+            description: Request timed out.
+            schema:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        x-nullable: true
+                        default: null
+                        description: A description of the timeout.
         '500':
             description: Unexpected server error.
             schema:
@@ -28,13 +38,3 @@ post:
                         x-nullable: true
                         default: null
                         description: A description of the error.
-        '524':
-            description: Request timed out.
-            schema:
-                type: object
-                properties:
-                    message:
-                        type: string
-                        x-nullable: true
-                        default: null
-                        description: A description of the timeout.
