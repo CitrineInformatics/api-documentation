@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>       <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>          <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>          <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <title>SystemQuery - Citrination API Documentation</title>
+    <meta name="description" content="Documentation of the Citrination API" />
+    <meta name="author" content="Kyle Michel">
+    <meta charset="UTF-8">
+    <link rel="icon" href="../../../../../themes/daux/img/favicon-navy.png" type="image/x-icon">
+    <!-- Mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
+    <!-- CSS -->
+    <link href='../../../../../themes/daux/css/theme-navy.min.css' rel='stylesheet' type='text/css'>
+            <!-- Tipue Search -->
+        <link href="../../../../../tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body class="">
+    
+<header class="Navbar hidden-print">
+    <a class="Navbar__brand" href="../../../../../index.html">Citrination API Documentation</a>
+
+    <div class="Search">
+        <svg class="Search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 451 451"><path d="M447.05 428l-109.6-109.6c29.4-33.8 47.2-77.9 47.2-126.1C384.65 86.2 298.35 0 192.35 0 86.25 0 .05 86.3.05 192.3s86.3 192.3 192.3 192.3c48.2 0 92.3-17.8 126.1-47.2L428.05 447c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.2-5.2 5.2-13.8 0-19zM26.95 192.3c0-91.2 74.2-165.3 165.3-165.3 91.2 0 165.3 74.2 165.3 165.3s-74.1 165.4-165.3 165.4c-91.1 0-165.3-74.2-165.3-165.4z"/></svg>
+        <input type="search" id="tipue_search_input" class="Search__field" placeholder="Search..." autocomplete="on" results=25 autosave=text_search>
+    </div>
+</header>
+<div class="Columns content">
+    <aside class="Columns__left Collapsible">
+        <div class="Collapsible__container">
+            <button type="button" class="Button Collapsible__trigger">
+                <span class="Collapsible__trigger--bar"></span>
+                <span class="Collapsible__trigger--bar"></span>
+                <span class="Collapsible__trigger--bar"></span>
+            </button>
+        </div>
+
+        <div class="Collapsible__content">
+            <!-- Navigation -->
+            <ul class='Nav'><li class='Nav__item '><a href="../../../../../quickstart/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>quickstart</a><ul class='Nav'></ul></li><li class='Nav__item Nav__item--open has-children'><a href="../../../../../api/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>api</a><ul class='Nav'><li class='Nav__item  has-children'><a href="../../../../../api/client/Client.html" class="folder"><i class="Nav__arrow">&nbsp;</i>client</a><ul class='Nav'><li class='Nav__item '><a href="../../../../../api/client/Client.html">Client</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="../../../../../api/search/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>search</a><ul class='Nav'><li class='Nav__item  has-children'><a href="../../../../../api/search/core/query/BooleanFilter.html" class="folder"><i class="Nav__arrow">&nbsp;</i>core</a><ul class='Nav'><li class='Nav__item  has-children'><a href="../../../../../api/search/core/query/BooleanFilter.html" class="folder"><i class="Nav__arrow">&nbsp;</i>query</a><ul class='Nav'><li class='Nav__item '><a href="../../../../../api/search/core/query/BooleanFilter.html">BooleanFilter</a></li></ul></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="../../../../../api/search/pif/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>pif</a><ul class='Nav'><li class='Nav__item Nav__item--open has-children'><a href="../../../../../api/search/pif/query/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>query</a><ul class='Nav'><li class='Nav__item  has-children'><a href="../../../../../api/search/pif/query/chemical/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>chemical</a><ul class='Nav'><li class='Nav__item '><a href="../../../../../api/search/pif/query/chemical/ChemicalFieldOperation.html">ChemicalFieldOperation</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="../../../../../api/search/pif/query/core/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>core</a><ul class='Nav'><li class='Nav__item '><a href="../../../../../api/search/pif/query/core/FieldOperation.html">FieldOperation</a></li><li class='Nav__item '><a href="../../../../../api/search/pif/query/core/FieldQuery.html">FieldQuery</a></li><li class='Nav__item '><a href="../../../../../api/search/pif/query/core/Filter.html">Filter</a></li><li class='Nav__item '><a href="../../../../../api/search/pif/query/core/PropertyQuery.html">PropertyQuery</a></li><li class='Nav__item '><a href="../../../../../api/search/pif/query/core/ReferenceQuery.html">ReferenceQuery</a></li><li class='Nav__item Nav__item--active'><a href="../../../../../api/search/pif/query/core/SystemQuery.html">SystemQuery</a></li></ul></li><li class='Nav__item '><a href="../../../../../api/search/pif/query/PifQuery.html">PifQuery</a></li></ul></li><li class='Nav__item  has-children'><a href="../../../../../api/search/pif/result/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>result</a><ul class='Nav'><li class='Nav__item '><a href="../../../../../api/search/pif/result/PifSearchHit.html">PifSearchHit</a></li><li class='Nav__item '><a href="../../../../../api/search/pif/result/PifSearchResult.html">PifSearchResult</a></li></ul></li></ul></li></ul></li></ul></li><li class='Nav__item '><a href="../../../../../migration/index.html" class="folder"><i class="Nav__arrow">&nbsp;</i>migration</a><ul class='Nav'></ul></li></ul>
+
+            <div class="Links">
+                                    <hr/>
+                                            <a href="https://github.com/CitrineInformatics/python-citrination-client" target="_blank">python client</a>
+                        <br />
+                                            <a href="https://github.com/CitrineInformatics/java-citrination-client" target="_blank">java client</a>
+                        <br />
+                                            <a href="http://www.citrine.io/pif" target="_blank">PIF documentation</a>
+                        <br />
+                                            <a href="http://www.citrine.io" target="_blank">Citrine Informatics</a>
+                        <br />
+                                    
+                
+                            </div>
+        </div>
+    </aside>
+    <div class="Columns__right ">
+        <div class="Columns__right__content">
+            <div class="doc_content">
+                <article class="Page">
+
+    <div class="Page__header">
+        <h1><a href="../../../../../api/index.html">api</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../../api/search/index.html">search</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../../api/search/pif/index.html">pif</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../../api/search/pif/query/index.html">query</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../../api/search/pif/query/core/index.html">core</a> <svg class="Page__header--separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.73 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1 0s-5.3 13.8 0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8 0 19.1 2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-4l225.1-225.1c5.3-5.2 5.3-13.8.1-19z"/></svg> <a href="../../../../../api/search/pif/query/core/SystemQuery.html">SystemQuery</a></h1>
+                <span style="float: left; font-size: 10px; color: gray;">
+            Tuesday, October 31, 2017 11:51 AM        </span>
+                    </div>
+
+
+    <div class="s-content">
+        <h2 id="page_Description">Description</h2>
+<p>A SystemQuery object contains information about a desired system.</p>
+<h2 id="page_Fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field name</th>
+<th>Value type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>properties</code></td>
+<td>Array of <a href="PropertyQuery.html"><code>PropertyQuery</code></a> objects</td>
+<td></td>
+<td>List of properties to search for</td>
+</tr>
+</tbody>
+</table>
+    </div>
+
+        <nav>
+        <ul class="Pager">
+            <li class=Pager--prev><a href="../../../../../api/search/pif/query/core/ReferenceQuery.html">Previous</a></li>            <li class=Pager--next><a href="../../../../../api/search/pif/query/PifQuery.html">Next</a></li>        </ul>
+    </nav>
+    </article>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- jQuery -->
+    <script src="../../../../../themes/daux/js/jquery-1.11.3.min.js"></script>
+
+    <!-- hightlight.js -->
+    <script src="../../../../../themes/daux/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- JS -->
+    
+    <script src="../../../../../themes/daux/js/daux.js"></script>
+
+            <!-- Tipue Search -->
+        <script type="text/javascript" src="../../../../../tipuesearch/tipuesearch.js"></script>
+
+        <script>
+            window.onunload = function(){}; // force $(document).ready to be called on back/forward navigation in firefox
+            $(function() {
+                tipuesearch({
+                    'base_url': '../../../../../'
+                });
+            });
+        </script>
+    
+</body>
+</html>

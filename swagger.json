@@ -1,0 +1,1760 @@
+{
+  "swagger": "2.0",
+  "schemes": [
+    "https"
+  ],
+  "host": "citrination.com",
+  "basePath": "/api",
+  "info": {
+    "title": "Citrination",
+    "version": "1.0.0",
+    "termsOfService": "https://citrination.com/tos",
+    "contact": {
+      "name": "Citrine Informatics",
+      "email": "admin@citrine.io",
+      "url": "https://citrine.io"
+    },
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "description": "# Introduction\nThe Citrination API provides much of the functionality that is available through the Citrination web interface. In addition, there exists some functionality that is only available through the API (for example, some of the more advanced query elements). All access to the API is controlled using a unique token assigned to each user (see the section on authentication).\n\nUsers may access the API directly through https requests, or may use one of the client libraries described below.\n\n# Python client\nA python client is available through [github](https://github.com/CitrineInformatics/python-citrination-client) or can be installed with pip using `pip install citrination-client`. There may be issues installing libraries that depend on [six](https://pypi.python.org/pypi/six) on OSX. If you encounter issues during installation, you may also try `pip install --ignore-installed six citrination-client`. The python client can be configured using:\n\n```python\nfrom citrination_client import *\n\nclient = CitrinationClient('YOUR_API_KEY')\n```\n\nIf you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then your client can be configured with:\n\n```python\nfrom citrination_client import *\n\nclient = CitrinationClient('YOUR_API_KEY', 'https://mysite.citrination.com')\n```\n\n<span style=\"color:red\">**Important!**</span> All variables and method names are represented in snake case in the python client library, rather than camel case as is used in this documentation. For example, a variable named `updatedAt` in this documentation would be `updated_at` in the python library.\n\n# Java client\nA java client is available through [github](https://github.com/CitrineInformatics/java-citrination-client). The client can be configured using:\n\n```java\nimport io.citrine.jcc.core.CitrinationClient;\n\nclass MyClass {\n    void createClient() {\n        CitrinationClient citrinationClient = new CitrinationClient.Builder()\n            .setApiKey('YOUR_API_KEY')\n            .build();\n    }\n}\n```\n\nIf you are using a private instance of Citrination (e.g. https://mysite.citrination.com), then your client can be configured with:\n\n```java\nimport io.citrine.jcc.core.CitrinationClient;\n\nclass MyClass {\n    void createClient() {\n        CitrinationClient citrinationClient = new CitrinationClient.Builder()\n            .setProject('mysite')\n            .setApiKey('YOUR_API_KEY')\n            .build();\n    }\n}\n```\n"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "ApiKey": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key",
+      "description": "You API key is available under account settings when you are logged into Citrination. Note that your API key will be different accross deployments of Citrination. Therefore, if you have an account on the open Citrination platform (https://citrination.com) and on a private instance named mysite (https://mysite.citrination.com), then you will have different API keys on each."
+    }
+  },
+  "security": [
+    {
+      "ApiKey": []
+    }
+  ],
+  "paths": {
+    "/datasets/search": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Search for datasets",
+        "description": "Search for datasets by the metadata for that dataset or the content of the files and PIFs that it contains.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "A query for datasets and options for that query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetReturningQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A search result with datasets that matched the input query.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "$ref": "#/definitions/DatasetSearchResult"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Request timed out.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-nullable": true,
+                  "default": null,
+                  "description": "A description of the timeout."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-nullable": true,
+                  "default": null,
+                  "description": "A description of the error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pifs/search": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Search for PIFs",
+        "description": "Search for PIFs by their content or by the metadata of the dataset in which they are contained.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "A query for PIFs and options for that query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PifSystemReturningQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A search result with PIF systems that matched the input query.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "$ref": "#/definitions/PifSearchResult"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Request timed out.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-nullable": true,
+                  "default": null,
+                  "description": "A description of the timeout."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-nullable": true,
+                  "default": null,
+                  "description": "A description of the error."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaseReturningQuery": {
+      "type": "object",
+      "description": "Base type for all queries against Citrination.",
+      "properties": {
+        "fromIndex": {
+          "type": "number",
+          "format": "integer",
+          "x-nullable": true,
+          "default": null,
+          "description": "The index of the first record to return. This is used for pagination through results."
+        },
+        "size": {
+          "type": "number",
+          "format": "integer",
+          "x-nullable": true,
+          "default": null,
+          "description": "The number of records to return. This is used for pagination through results. The number of hits that are returned will never be greater than this number, but may be smaller if there are fewer records in the scope of the query or if the maximum number of records that the server will allow to be returned is exceeded (this is typically 100)."
+        },
+        "randomResults": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether a random set of results should be returned. If not specified, the default value is false."
+        },
+        "randomSeed": {
+          "type": "number",
+          "format": "int32",
+          "x-nullable": true,
+          "default": null,
+          "description": "The seed to the pseudo-random number generator used to generate random results. If not specified, a value based on the current time will be used. This should be used when paginating through results; if not specified, a different random seed will be generated for each request and there may be duplicate records between sets of results."
+        },
+        "scoreRelevance": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether to score relevance in queries. If not specified, the relevancy score is not tracked."
+        },
+        "returnMaxScore": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether to return the maximum score over all hits in scope, not just the results that are returned. This only has meaning when scoreRelevance is set to true. If not specified, the default value of this setting is false."
+        },
+        "timeout": {
+          "type": "number",
+          "format": "int32",
+          "x-nullable": true,
+          "default": null,
+          "description": "The maximum time, in milliseconds, to wait for the query to finish execution. An effort is made to respect this timeout though there is no guarantee that the request will be terminated at exactly this time. If not specified, the default value of this setting is 60000 (equal to 60 seconds)."
+        }
+      }
+    },
+    "BooleanFilter": {
+      "type": "object",
+      "description": "A filter against the value of a boolean-typed field.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "exists": {
+          "$ref": "#/definitions/exists"
+        },
+        "equal": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "True to match true values. False to match false values."
+        },
+        "filter": {
+          "$ref": "#/definitions/nested"
+        }
+      }
+    },
+    "DataQuery": {
+      "type": "object",
+      "description": "A query against dataset metadata and/or PIF systems.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "simple": {
+          "$ref": "#/definitions/simple"
+        },
+        "simpleWeight": {
+          "$ref": "#/definitions/simpleWeight"
+        },
+        "dataset": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetQuery"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "A list of queries to run against the content of datasets."
+        },
+        "system": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PifSystemQuery"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "A list of queries to run against the content of PIFs."
+        },
+        "query": {
+          "$ref": "#/definitions/nested"
+        }
+      }
+    },
+    "exists": {
+      "type": "boolean",
+      "x-nullable": true,
+      "default": null,
+      "description": "When set to true, the field must exist and have a non-null value. When set to false, the field must not exist or, if it does exist, must have a null value."
+    },
+    "Filter": {
+      "type": "object",
+      "description": "An equality or range filter against a single field.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "exists": {
+          "$ref": "#/definitions/exists"
+        },
+        "equal": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The string the match. This is executed as a phrase query meaning that the exact phrase in this string must be present in a record to match."
+        },
+        "min": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "If the input value is non-numeric, or the field being searched does not support numbers, then this is the lexicographical minimum of values to match. If the input value is numeric and the field being searched supports numbers, then this is the minimum numeric value to match."
+        },
+        "max": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "If the input value is non-numeric, or the field being searched does not support numbers, then this is the lexicographical maximum of values to match. If the input value is numeric and the field being searched supports numbers, then this is the maximum numeric value to match."
+        },
+        "exact": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether the value in the in _equal_ field must match exactly the entire value in the field being searched. For example, with _equal_ set to \"gap\" and _exact_ set to false, the filter will match against a field that contains \"band gap\". However, with _equal_ set to \"gap\" and _exact_ set to false, the filter will not match \"band gap\"; it will only match against a field that contains only the word \"gap\"."
+        },
+        "filter": {
+          "$ref": "#/definitions/nested"
+        }
+      }
+    },
+    "logic": {
+      "type": "string",
+      "enum": [
+        "SHOULD",
+        "MUST",
+        "MUST_NOT",
+        "OPTIONAL",
+        null
+      ],
+      "x-nullable": true,
+      "default": null,
+      "description": "When multiple queries appear in a list, the logic defines the way in which each will be interpreted.\n- SHOULD is equivalent to boolean OR logic.\n- MUST is eqivalent to boolean AND logic.\n- MUST_NOT is equivalent to boolean NOT logic.\n- OPTIONAL does not have an effect on whether a record matches; the specific query element is ignored during the primary search for records in scope. However, OPTIONAL queries are executed on subsequent steps such as extractions and data statistics gathering.\n- null is interpreted as SHOULD.\n\nWhen multiple queries exist with SHOULD logic, a minimum of 1 must match in order for the overall query to match.\n"
+    },
+    "nested": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "The type of the parent object. This is a recursive definition."
+      },
+      "x-nullable": true,
+      "default": null,
+      "description": "Nested query elements can be added as deeply as needed in order to create complex combinations of boolean logic."
+    },
+    "simple": {
+      "type": "string",
+      "x-nullable": true,
+      "default": null,
+      "description": "A simple query that is run against all fields that contain string values. This query is run against all fields in the current object, in the children of this object, in the children's children, and so on. Boolean OR logic is applied between all of these queries.\n\nQuery strings are tokenized on whitespace unless surrounded by quotes. For example, `GaN \"band gap\"` tokenizes to `GaN` and `band gap` where each token must match its entire phrase in a record. Tokens are executed with boolean OR logic. Therefore, `GaN \"band gap\"` matches records that contain `GaN` or `band gap`.\n\nSince simple filters are extremely inclusive operations (only one token needs to match against any field in this object or its children), it is typically recommended that relevancy scoring be turned on for the query so that the records that match the most values are ranked the highest.\n"
+    },
+    "simpleWeight": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "additionalProperties": {
+        "type": "number",
+        "format": "double"
+      },
+      "description": "A map of relative paths to field weights for the simple query on this object. For example, if the current object had a field named fieldA, which in turn contained fields fieldA1 and fieldA2, then they could be weighted differently by setting this map to, for example, {\"fieldA.fieldA1\": 2.5, \"fieldA.fieldA2\": 1.5}.\nWeights are multiplied onto the score for a field that matches a query. This only has an effect when relevance scoring is enabled.\nPaths (keys in this map) are relative to the current object. Therefore, in the above example, the same weights could be configured from within the fieldA object, in which case it would be {\"fieldA1\": 2.5, \"fieldA2\": 1.5}.\n"
+    },
+    "sortOrder": {
+      "type": "string",
+      "enum": [
+        "ASCENDING",
+        "DESCENDING",
+        null
+      ],
+      "x-nullable": true,
+      "default": null,
+      "description": "Whether to sort a field in ascending or descending order. This operates in lexicographical or numeric modes depending on the value in a field. When a field contains mixed types across records, it is always assumed that a numeric value is less than a non-numeric (string) value. Currently, lexicographical sorting is only supported through the first 10 characters of a string.\n\nThe system will handle sorting across mixed units so long as they are suported. For example, if a field contains a temperature value reported in K in some records, but degrees C in others, then the system will handle returning a record with 50 K before 10 degrees C when sorting in ascending order.\n\nIn the case that a field is being sorted on that contains some supported units and some unsupported ones, then the supported values will always appear before the unsupported ones, regardless of whether sorting in ascending or descending order. For example, if a field contains temperature values where some are reported in K, others in degrees C, and finally others in some unknown set of units, then the values reported in K and degrees C will always appear before the unrecognized units when sorting on that field.\n"
+    },
+    "updatedAtQuery": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Filter"
+      },
+      "x-nullable": true,
+      "default": null,
+      "description": "Filters against the date and time that the record was last updated. Each string in the filters should be in a typical DateTime format. See [https://www.w3.org/TR/NOTE-datetime](https://www.w3.org/TR/NOTE-datetime) for examples.\n"
+    },
+    "weight": {
+      "type": "number",
+      "format": "double",
+      "x-nullable": true,
+      "default": null,
+      "description": "A weight to apply to this query element. Weights are only applicable when relevance is being used. In that case, weights are used to bias results (by multiplying their score by this value) so that some parts of the query can have a higher or lower influence on the order of results. In the case that the weight is null, it is interpreted as a value of 1.\n"
+    },
+    "BaseSearchResult": {
+      "type": "object",
+      "description": "The base type for all search results against Citrination.",
+      "properties": {
+        "took": {
+          "type": "number",
+          "format": "int64",
+          "x-nullable": true,
+          "default": null,
+          "description": "The number of milliseconds that the query took to execute on the Citrination server. This does _not_ include the latency in the request being sent to Citrination or returned to the local machine."
+        },
+        "totalNumHits": {
+          "type": "number",
+          "format": "int64",
+          "x-nullable": true,
+          "default": null,
+          "description": "The total number of hits against the query that was executed. The number of hits returned from the server may be significantly less than this due to the pagination of results."
+        },
+        "maxScore": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "default": null,
+          "description": "The maximum score for all hits against the query that was executed (not simply the max score of the hits in the current paginated set of results)."
+        }
+      }
+    },
+    "updatedAt": {
+      "type": "string",
+      "x-nullable": true,
+      "default": null,
+      "description": "The date and time that the dataset record was last updated."
+    },
+    "DatasetQuery": {
+      "type": "object",
+      "description": "A query against a Dataset.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "simple": {
+          "$ref": "#/definitions/simple"
+        },
+        "simpleWeight": {
+          "$ref": "#/definitions/simpleWeight"
+        },
+        "id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the ID of a dataset."
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/updatedAtQuery"
+        },
+        "isFeatured": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanFilter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the isFeatured field of a dataset."
+        },
+        "name": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the name of a dataset."
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the description of a dataset."
+        },
+        "owner": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the name of the owner of a dataset."
+        },
+        "email": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the email address of the owner of a dataset."
+        },
+        "query": {
+          "$ref": "#/definitions/nested"
+        }
+      }
+    },
+    "DatasetReturningQuery": {
+      "type": "object",
+      "description": "A query that returns information about datasets.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseReturningQuery"
+        },
+        {
+          "properties": {
+            "query": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the content of datasets and/or PIF records."
+            },
+            "countPifs": {
+              "type": "boolean",
+              "x-nullable": true,
+              "default": null,
+              "description": "Whether to count the number of PIFs in scope of the current query within each dataset. If there are no queries against the content of the PIFs, then this will return the total number of PIFs in the dataset. If there are queries against PIF content, then this will return the number of PIFs in each dataset that matched that query."
+            }
+          }
+        }
+      ]
+    },
+    "DatasetSearchHit": {
+      "type": "object",
+      "description": "A single dataset that matched a query run against Citrination.",
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "default": null,
+          "description": "The relevancy score for the dataset against the executed query."
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The unique ID of the dataset."
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The owner-defined name of the dataset."
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The owner-defined description of the dataset."
+        },
+        "owner": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The name of the owner of the dataset."
+        },
+        "email": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The email address of the owner of the dataset."
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether the dataset is a featured one. A null value implies that the dataset is not featured."
+        },
+        "numPifs": {
+          "type": "number",
+          "format": "int64",
+          "x-nullable": true,
+          "default": null,
+          "description": "When requested in the query, this is the number of PIFs that are in the dataset and match any filters on the content of PIF systems."
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/updatedAt"
+        }
+      }
+    },
+    "DatasetSearchResult": {
+      "type": "object",
+      "description": "The result of a single query for datasets on Citrination.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseSearchResult"
+        },
+        {
+          "properties": {
+            "hits": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DatasetSearchHit"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "The current set of paginated hits against the query that was executed."
+            }
+          }
+        }
+      ]
+    },
+    "ChemicalFieldQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "Query against the value of a field that contains chemical information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseFieldQuery"
+        },
+        {
+          "properties": {
+            "filter": {
+              "$ref": "#/definitions/ChemicalFilter"
+            }
+          }
+        }
+      ]
+    },
+    "ChemicalFilter": {
+      "type": "object",
+      "description": "An equality filter against a field that contains chemical information.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "exists": {
+          "$ref": "#/definitions/exists"
+        },
+        "equal": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The string the match. This is executed as a phrase query meaning that the exact phrase in this string must be present in a record to match."
+        },
+        "element": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether the value in the _equal_ field should match against the elements in a formula. During indexing of data, chemical formula-containing fields are also saved as a list of elements. If set to true, then the value in the _equal_ field is treated as a single element and searched for in the list of elements. For example, a query for \"equal\"=\"Fe\" would match a record that contained \"Fe2O3\". When this field has a null value it is interpreted as false."
+        },
+        "partial": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "Whether the value in the _equal_ field should match against partial components a formula. During indexing of data, chemical formula-containing fields are also saved as a series of sub-formulas with 2 or 3 elements. If set to true, then the value in the _equal_ field is also searched against these partial formula. For example, a query for \"equal\"=\"LiO2\" or \"equal\"=\"oxide\" would match a record that contained \"LiCoO2\". When this field has a null value it is interpreted as false."
+        },
+        "exact": {
+          "type": "boolean",
+          "x-nullable": true,
+          "default": null,
+          "description": "When the value in the in _equal_ field must match exactly the entire value in the field being searched. For example, with _equal_ set to \"gap\" and _exact_ set to false, the filter will match against a field that contains \"band gap\". However, with _equal_ set to \"gap\" and _exact_ set to false, the filter will not match \"band gap\"; it will only match against a field that contains only the word \"gap\"."
+        },
+        "filter": {
+          "$ref": "#/definitions/nested"
+        }
+      }
+    },
+    "CompositionQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against a composition in a chemical system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "element": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChemicalFieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the given (first) name of a person."
+            },
+            "actualWeightPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual (measured) weight percent of the element."
+            },
+            "actualAtomicPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual (measured) atomic percent of the element."
+            },
+            "idealWeightPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ideal (theoretical) weight percent of the element."
+            },
+            "idealAtomicPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ideal (theoretical) atomic percent of the element."
+            }
+          }
+        }
+      ]
+    },
+    "BaseFieldQuery": {
+      "type": "object",
+      "description": "Base class for all queries against simple fields.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "simple": {
+          "$ref": "#/definitions/simple"
+        },
+        "simpleWeight": {
+          "$ref": "#/definitions/simpleWeight"
+        },
+        "extractAs": {
+          "$ref": "#/definitions/extractAs"
+        },
+        "extractAll": {
+          "$ref": "#/definitions/extractAll"
+        },
+        "extractWhenMissing": {
+          "$ref": "#/definitions/extractWhenMissing"
+        }
+      }
+    },
+    "BaseObjectQuery": {
+      "type": "object",
+      "description": "Base class for all queries against object fields.",
+      "properties": {
+        "logic": {
+          "$ref": "#/definitions/logic"
+        },
+        "weight": {
+          "$ref": "#/definitions/weight"
+        },
+        "simple": {
+          "$ref": "#/definitions/simple"
+        },
+        "simpleWeight": {
+          "$ref": "#/definitions/simpleWeight"
+        },
+        "extractAs": {
+          "$ref": "#/definitions/extractAs"
+        },
+        "extractAll": {
+          "$ref": "#/definitions/extractAll"
+        },
+        "extractWhenMissing": {
+          "$ref": "#/definitions/extractWhenMissing"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldQuery"
+          },
+          "x-nullable": true,
+          "default": null,
+          "description": "Queries against the tags stored for an object."
+        },
+        "length": {
+          "$ref": "#/definitions/length"
+        },
+        "offset": {
+          "$ref": "#/definitions/offset"
+        }
+      }
+    },
+    "ClassificationQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the classifications of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the classification."
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries aginst the value of the classification."
+            }
+          }
+        }
+      ]
+    },
+    "DisplayItemQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against a display item in a publication.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "number": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the number of the display item in the publication."
+            },
+            "title": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the title of the display item."
+            },
+            "caption": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the caption of the display item."
+            }
+          }
+        }
+      ]
+    },
+    "extractAll": {
+      "type": "boolean",
+      "x-nullable": true,
+      "default": null,
+      "description": "When extractAs is configured for a field and a match is made against an object in a list, only that object is extracted. When extractAll is set to true, the list that contained that matched object is extracted. Note that the _entire_ list is extracted, not just the elements that matched. When this value is null, it is interpreted as false.\n"
+    },
+    "extractAs": {
+      "type": "string",
+      "x-nullable": true,
+      "default": null,
+      "description": "If non-null, the value matched by this query element will be extracted into a key/value map where the key is equal to this value. If the object that was matched is a part of a list, only one value from that list will be returned, even if more than one matched. Extractions do not affect whether a record matches an overall query; they are simply instructions to pull out matched values from PIFs into a map."
+    },
+    "ExtractionSort": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "Sort to apply using the extractAs key set for a query element.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The extractAs key that appears in the query element that corresponds to the value to sort on."
+        },
+        "order": {
+          "$ref": "#/definitions/sortOrder"
+        }
+      }
+    },
+    "extractWhenMissing": {
+      "x-nullable": true,
+      "default": null,
+      "description": "When extractAs is configured for a field but that query element does not match in a record, then this value will be placed into the extracted value map under the key specified by extractAs. This value can be of any type."
+    },
+    "FieldQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "Query against the value of a single field.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseFieldQuery"
+        },
+        {
+          "properties": {
+            "filter": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Filter"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Filters against the value in the field."
+            }
+          }
+        }
+      ]
+    },
+    "FileReferenceQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against a reference to a file.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "relativePath": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the relative path of the file."
+            },
+            "mimeType": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the mime type path of the file."
+            },
+            "sha256": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the SHA256 hash of the file."
+            },
+            "md5": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the MD5 hash of the file."
+            }
+          }
+        }
+      ]
+    },
+    "IdQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the ID of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the ID."
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the value of the ID."
+            }
+          }
+        }
+      ]
+    },
+    "length": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FieldQuery"
+      },
+      "x-nullable": true,
+      "default": null,
+      "description": "Queries against the number of objects in the field."
+    },
+    "NameQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the name of a person.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "given": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the given (first) name of a person."
+            },
+            "family": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the family (last) name of a person."
+            },
+            "title": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the title of a person (e.g. Dr., Mr., Mrs., etc.)"
+            },
+            "suffix": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the suffix of a person."
+            }
+          }
+        }
+      ]
+    },
+    "offset": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FieldQuery"
+      },
+      "x-nullable": true,
+      "default": null,
+      "description": "Queries against the index of an object within a list."
+    },
+    "PagesQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the pages of a reference.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "start": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the first page of a reference."
+            },
+            "end": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the last page of a reference."
+            }
+          }
+        }
+      ]
+    },
+    "ProcessStepQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against a single process step in the preparation of a material.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the process step."
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValueQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the details of the process step."
+            }
+          }
+        }
+      ]
+    },
+    "PropertyQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query aginst a measured property of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueQuery"
+        },
+        {
+          "properties": {
+            "conditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValueQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against conditions of the property."
+            },
+            "references": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReferenceQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against references of the property."
+            },
+            "dataType": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the data type of the property."
+            }
+          }
+        }
+      ]
+    },
+    "QuantityQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query aginst the quantity of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "actualMassPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual (measured) mass percent of this component of a system."
+            },
+            "actualVolumePercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual (measured) volume percent of this component of a system."
+            },
+            "actualNumberPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual (measured) number percent of this component of a system."
+            },
+            "idealMassPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ideal (theoretical) mass percent of this component of a system."
+            },
+            "idealVolumePercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ideal (theoretical) volume percent of this component of a system."
+            },
+            "idealNumberPercent": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ideal (theoretical) number percent of this component of a system."
+            }
+          }
+        }
+      ]
+    },
+    "ReferenceQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against a reference of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "doi": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the DOI of the reference."
+            },
+            "isbn": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ISBN of the reference."
+            },
+            "issn": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the ISSN of the reference."
+            },
+            "url": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the url of the reference."
+            },
+            "title": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the title of the reference."
+            },
+            "publisher": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the publisher of the reference."
+            },
+            "journal": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the journal of the reference."
+            },
+            "volume": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the volume of the reference."
+            },
+            "issue": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the issue of the reference."
+            },
+            "year": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the publication year of the reference."
+            },
+            "figure": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DisplayItemQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the figure of the reference."
+            },
+            "table": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DisplayItemQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the table of the reference."
+            },
+            "pages": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PagesQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the pages of the reference."
+            },
+            "authors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the authors of the reference."
+            },
+            "editors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the editors of the reference."
+            },
+            "affiliations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the affiliations of the authors of the reference."
+            },
+            "references": {
+              "$ref": "#/definitions/nested"
+            }
+          }
+        }
+      ]
+    },
+    "SourceQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the source of a system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "producer": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the producer of the system."
+            },
+            "url": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the url of the source of the system."
+            }
+          }
+        }
+      ]
+    },
+    "ValueQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query aginst the name, value, and units of a value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "name": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the value."
+            },
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the actual value. This searches the scalars, vectors, and matrices fields within a PIF record."
+            },
+            "file": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileReferenceQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the file reference of the value."
+            },
+            "units": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the units of the value. When possible, units will be automatically normalized (along with the _value_ field). This allows for searching across mixed sets of units stored for a value in different records. If the value that is stored can be directly converted to this set of units, that conversion is automatically applied. For example, a query for a value in units of eV might match a record with a value stored in units of J; the value that is returned from the query would be converted to eV."
+            }
+          }
+        }
+      ]
+    },
+    "PifSystemQuery": {
+      "type": "object",
+      "x-nullable": true,
+      "default": null,
+      "description": "A query against the content of a PIF system.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseObjectQuery"
+        },
+        {
+          "properties": {
+            "uid": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Filter"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Filters against the UID of the system."
+            },
+            "updatedAt": {
+              "$ref": "#/definitions/updatedAtQuery"
+            },
+            "names": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the name of the system."
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IdQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the IDs of the system."
+            },
+            "classifications": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ClassificationQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the classifications of the system."
+            },
+            "source": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SourceQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the source of the system."
+            },
+            "quantity": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/QuantityQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the quantity of the system."
+            },
+            "chemicalFormula": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChemicalFieldQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the chemical formula of the system."
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CompositionQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the chemical composition of the system."
+            },
+            "properties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PropertyQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the measured properties of the system."
+            },
+            "preparation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessStepQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the process steps used to create of the system."
+            },
+            "references": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReferenceQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the publication information of the system."
+            },
+            "subSystems": {
+              "$ref": "#/definitions/nested"
+            }
+          }
+        }
+      ]
+    },
+    "PifSystemReturningQuery": {
+      "type": "object",
+      "description": "A query that returns information about PIFs.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseReturningQuery"
+        },
+        {
+          "properties": {
+            "query": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataQuery"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "Queries against the content of datasets and/or PIF records."
+            },
+            "returnSystem": {
+              "type": "boolean",
+              "x-nullable": true,
+              "default": null,
+              "description": "Whether to return the PIF system that matched. If can be useful to set this to false in order to reduce payload size when the actual PIF record is not needed in a results set (for example, when only the IDs are needed or when important information is already being extracted using extractAs keys). When set to null, this value is interpreted as true."
+            },
+            "addLatex": {
+              "type": "boolean",
+              "x-nullable": true,
+              "default": null,
+              "description": "Whether to inject LaTeX formatting into results. This only applies to certain fields in the PIF that support conversion to LaTeX, such as chemical formulae. If set to false, this has no effect on LaTeX already present in the record; that existing markup will remain. When set to null, this value is interpreted as false."
+            },
+            "returnExtractedPath": {
+              "type": "boolean",
+              "x-nullable": true,
+              "default": null,
+              "description": "Whether to return the JSON pointer to extracted values. When extractAs is configured for parts of the query, the matched elements are saved in a key/value map in each search hit. A peer to that map stores the same set of keys but with values that are JSON pointers to the location in the PIF from which that element was extracted. It can be useful to turn off this feature to reduce payload size when paths are not needed. When set to null, this value is interpreted as true."
+            },
+            "unwrapSingleValueExtractions": {
+              "type": "boolean",
+              "x-nullable": true,
+              "default": null,
+              "description": "When values are extracted with extractAll set to true, even object lists with length one will be extracted as a list. This option unwraps lists of length one so that the element within the list is extracted, rather than the entire list. When set to null, this value is interpreted as false."
+            }
+          }
+        }
+      ]
+    },
+    "PifSearchHit": {
+      "type": "object",
+      "description": "A single PIF that matched a query run against Citrination.",
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "default": null,
+          "description": "The relevancy score for the PIF against the executed query."
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The full ID of the PIF in the format datasetId/datasetVersion/pifUID."
+        },
+        "dataset": {
+          "type": "string",
+          "x-nullable": true,
+          "default": null,
+          "description": "The ID of the dataset that contains this PIF."
+        },
+        "datasetVersion": {
+          "type": "number",
+          "format": "long",
+          "x-nullable": true,
+          "default": null,
+          "description": "The version of the dataset that contains this PIF."
+        },
+        "system": {
+          "type": "object",
+          "x-nullable": true,
+          "default": null,
+          "description": "The structure of PIF system objects is defined at https://citrine.io/pif."
+        },
+        "extracted": {
+          "type": "object",
+          "x-nullable": true,
+          "default": null,
+          "additionalProperties": true,
+          "description": "A key/value map that contains the extracted fields from the query. When query elements match that contain extractAs, the matched objects will be present in this map under the key specified by extractAs."
+        },
+        "extractedPath": {
+          "type": "object",
+          "x-nullable": true,
+          "default": null,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A key/value map that is a peer to the extracted field. This map contains the same key set, but the values are JSON pointers that reference the part of the PIF from which the value in extracted was matched."
+        },
+        "updatedAt": {
+          "$ref": "#/definitions/updatedAt"
+        }
+      }
+    },
+    "PifSearchResult": {
+      "type": "object",
+      "description": "The result of a single query for PIF systems on Citrination.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseSearchResult"
+        },
+        {
+          "properties": {
+            "hits": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PifSearchHit"
+              },
+              "x-nullable": true,
+              "default": null,
+              "description": "The current set of paginated hits against the query that was executed."
+            }
+          }
+        }
+      ]
+    }
+  }
+}
